@@ -29,27 +29,27 @@ public:
 	std::vector<std::wstring> GetModuleFilenameFromProcessID(const int processID);
 
 	template<typename T>
-	T ReadProcessMemoryFromProcessID(void* hProcess, void* targetAddress);
+	T ReadProcessMemory(void* hProcess, void* targetAddress);
 
 	template<typename T>
-	void WriteProcessMemoryFromProcessID(void* hProcess, void* targetAddress, T writeData);
+	void WriteProcessMemory(void* hProcess, void* targetAddress, T writeData);
 };
  
 
 template<typename T>
-T ProcessHack::ReadProcessMemoryFromProcessID(void* hProcess, void* targetAddress)
+T ProcessHack::ReadProcessMemory(void* hProcess, void* targetAddress)
 {
 	T data{};
 
-	ReadProcessMemory(hProcess, targetAddress, &data, sizeof(T), nullptr);
+	::ReadProcessMemory(hProcess, targetAddress, &data, sizeof(T), nullptr);
 
 	return data;
 }
 
 template<typename T>
-void ProcessHack::WriteProcessMemoryFromProcessID(void* hProcess, void* targetAddress, T writeData)
+void ProcessHack::WriteProcessMemory(void* hProcess, void* targetAddress, T writeData)
 {
-	WriteProcessMemory(hProcess, targetAddress, &writeData, sizeof(T), nullptr);
+	::WriteProcessMemory(hProcess, targetAddress, &writeData, sizeof(T), nullptr);
 }
  
 
